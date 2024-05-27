@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 class MainViewModel: ViewModel() {
 
     private val apiKey = BuildConfig.API_KEY
-
+    
     private val _boxOfficeState = mutableStateOf(BoxOfficeState())
     val boxOfficeState: State<BoxOfficeState> = _boxOfficeState
 
@@ -22,6 +22,7 @@ class MainViewModel: ViewModel() {
 
     private fun fetchMovies() {
         Log.d("jk-log", "fetchMoview in MainViewModel Called ")
+        Log.d("jk-log","apk-key: $apiKey")
         viewModelScope.launch {
             Log.d("jk-log", "viewModelScope.launch before try")
             try {
