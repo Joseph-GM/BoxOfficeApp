@@ -26,7 +26,7 @@ class MainViewModel: ViewModel() {
         viewModelScope.launch {
             Log.d("jk-log", "viewModelScope.launch before try")
             try {
-               val response = apiService.getMovies(apiKey, "20240524")
+               val response = apiService.getMovies(apiKey, "20240525")
                 _boxOfficeState.value = _boxOfficeState.value.copy(
                     loading = false,
                     error = null,

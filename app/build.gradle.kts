@@ -1,9 +1,15 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
 }
 
 val API_KEY: String = project.findProperty("API_KEY") as String? ?: ""
+
+val localProperties = Properties()
+localProperties.load(rootProject.file("local.properties").inputStream())
+
 
 android {
     namespace = "io.github.josephgm.boxofficeapp"
@@ -22,8 +28,8 @@ android {
             useSupportLibrary = true
         }
 
-        //Added part for Githup upload
-        buildConfigField("String", "API_KEY", "\"${project.properties["API_KEY"] ?: ""}\"")
+        val apiKey = localProperties.getProperty("API_KEY") ?: "default_api_key"
+        buildConfigField("String", "API_KEY", "\"$apiKey\"")
 
     }
 
@@ -34,10 +40,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "API_KEY", "\"${project.properties["API_KEY"] ?: ""}\"")
-        }
-        debug {
-            buildConfigField("String", "API_KEY", "\"${project.properties["API_KEY"] ?: ""}\"")
+
         }
 
     }
